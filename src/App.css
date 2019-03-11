@@ -14,8 +14,81 @@ a {
   text-decoration: none;
 }
 
+.wrapper {
+  width: 100%;
+  text-align: center;
+}
+
+.innerWrapper {
+   width: 960px;
+  margin: 0 auto;
+ }
+
 /* Header */
 .header {
-  height: 50px;
+  height: 60px;
+  padding: 8px;
   background-color: #00574B;
+}
+
+.header h1 {
+  float: left;
+}
+
+.floatRight {
+  float: right;
+}
+
+.login {
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  margin: auto auto;
+  vertical-align: central;
+}
+
+.login form {
+  height: 25%;
+}
+
+.login input[type="text"] {
+  height: 25px;
+  width: 250px;
+}
+
+.login input[type="submit"] {
+  height: 40px;
+  width: 250px;
+}
+
+.singleInput {
+  width: 250px;
+  margin: 10px auto;
+}
+
+.singleInput p {
+  float:left;
+}
+
+.btn_login {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  float: right;
+}
+
+.btn_login img {
+  height: 40px;
+  width: 40px;
+}
+
+.modalLogo img {
+  height: 200px;
+  width: 200px;
+}
+
+.modalFooter {
+  margin-top: 15px;
+  font-size: .75em;
 }

@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router';
 import '../App.css';
+import axios from 'axios';
 import Modal from 'react-awesome-modal';
 
-class Header extends Component {
+class Nav extends Component {
     constructor(props) {
         super(props);
         this.state = {
             visible: false,
             username: '',
             pass: '',
+            isLogged: false,
         };
     }
 
@@ -26,10 +29,20 @@ class Header extends Component {
 
     loginUser(event) {
         event.preventDefault();
-        const username = this.username.value;
-        const password = this.password.value;
-
-
+        axios.post('/api/loginUser', {
+            email: this.state.username,
+            password: this.state.password
+        })
+            .then(res => {
+                localStorage.setItem('jwt_access', res.headers.authorization);
+                let today = new Date();
+                today.setDate(today.getDate() + 12);
+                document.cookie = "jwt_access" + res.headers.authorization + "; expires=" + today;
+                window.location.reload();
+            })
+            .catch(error => {
+                console.log("Log In Failed.")
+            })
     }
 
     render() {
@@ -67,7 +80,7 @@ class Header extends Component {
                                     </div>
                                     <input type="submit" value="Sign In"/>
                                     <div className="modalFooter">
-                                        <a>Forgot Password?</a> | <a>Create Account</a>
+                                        <a href="/ForgotPassword/">Forgot Password?</a> | <a href="/CreateAccount/">Create Account</a>
                                     </div>
                                 </form>
                             </div>
@@ -80,4 +93,4 @@ class Header extends Component {
     }
 }
 
-export default Header;
+export default Nav;
