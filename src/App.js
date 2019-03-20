@@ -14,7 +14,7 @@ import NavLoggedIn from "./components/NavLoggedIn";
 class App extends Component {
     componentWillMount() {
         if (localStorage.getItem('jwt_access') !== null) {
-            axios.get('/api/verify-user', {
+            axios.get('https://clouddevdb.cpvkbdcnilcb.eu-west-2.rds.amazonaws.com/login', {
                 headers: {
                     Authorization: localStorage.getItem('jwt_access')
                 }
