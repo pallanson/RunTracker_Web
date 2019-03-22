@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
+import { Auth } from "aws-amplify";
 import '../App.css';
 import axios from 'axios';
 import Modal from 'react-awesome-modal';
@@ -64,6 +65,7 @@ class Nav extends Component {
             password: this.state.password
         })
             .then(res => {
+                console.log("I got here");
                 localStorage.setItem('jwt_access', res.headers.authorization);
                 let today = new Date();
                 today.setDate(today.getDate() + 12);
@@ -82,7 +84,7 @@ class Nav extends Component {
             username: this.state.username,
             password: this.state.password
         });
-    }
+    };
 
     render() {
         return (
@@ -99,12 +101,13 @@ class Nav extends Component {
                         <Modal
                             visible={this.state.visible}
                             width="400"
-                            height="450"
+                            height="475"
                             effect="fadeInDown"
                             onClickAway={() => this.closeModal()}
                         >
-                            <div className="login">
+                            <div className="modal">
                                 <form onSubmit={this.loginUser.bind(this)}>
+                                    <h1>Login</h1>
                                     <div className="modalLogo">
                                         <img src={require('../img/Sports-Running-icon.png')} alt="Run Away Logo"/>
                                     </div>
@@ -126,12 +129,13 @@ class Nav extends Component {
                         <Modal
                             visible={this.state.visibleRegister}
                             width="400"
-                            height="450"
+                            height="525"
                             effect="fadeInDown"
                             onClickAway={() => this.closeRegisterModal()}
                         >
-                            <div className="register">
+                            <div className="modal">
                                 <form onSubmit={this.createUser.bind(this)}>
+                                    <h1>Register</h1>
                                     <div className="modalLogo">
                                         <img src={require('../img/Sports-Running-icon.png')} alt="Run Away Logo"/>
                                     </div>

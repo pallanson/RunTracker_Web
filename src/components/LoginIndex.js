@@ -17,7 +17,7 @@ class LoginIndex extends Component {
                 <br/>
                 <h1>Welcome to Run Away!</h1>
                 <br/>
-                <img src={require('../img/Sports-Running-icon.png')} alt="Logo"/>
+                <img src={require('../img/Sports-Running-icon.png')} alt="Logo" width={200}/>
                 <h2>Run Away From All Your Worries!</h2><br/>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis mi eu dolor tristique imperdiet
                     consequat auctor ipsum. Pellentesque non tincidunt neque. Morbi convallis nulla et bibendum
