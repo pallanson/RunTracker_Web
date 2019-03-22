@@ -51,16 +51,6 @@ a {
   height: 25%;
 }
 
-.login input[type="text"] {
-  height: 25px;
-  width: 250px;
-}
-
-.login input[type="submit"] {
-  height: 40px;
-  width: 250px;
-}
-
 .singleInput {
   width: 250px;
   margin: 10px auto;
@@ -68,6 +58,16 @@ a {
 
 .singleInput p {
   float:left;
+}
+
+.singleInput input[type="text"] {
+  height: 25px;
+  width: 250px;
+}
+
+input[type="submit"] {
+  height: 40px;
+  width: 250px;
 }
 
 .btn_login {
@@ -84,11 +84,19 @@ a {
 }
 
 .modalLogo img {
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
+  margin-top: 20px;
 }
 
 .modalFooter {
   margin-top: 15px;
   font-size: .75em;
+}
+
+.modalFooter button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
 }

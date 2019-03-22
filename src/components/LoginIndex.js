@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import '../App.css';
-import Modal from 'react-awesome-modal';
 
 class LoginIndex extends Component {
     constructor(props) {
