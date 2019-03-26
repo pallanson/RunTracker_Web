@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
 import '../App.css';
-import axios from 'axios';
 
 class NavLoggedIn extends Component {
     state = {

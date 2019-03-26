@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
-import { Auth } from "aws-amplify";
 import '../App.css';
 import axios from 'axios';
 import Modal from 'react-awesome-modal';
@@ -33,7 +32,7 @@ class Nav extends Component {
     }
 
     closeRegisterModal() {
-        this.setState( {
+        this.setState({
             visibleRegister: false
         });
     }
@@ -43,11 +42,10 @@ class Nav extends Component {
         let id = target.id;
         let value = target.value;
         if (id === 'email') {
-            this.setState( {
+            this.setState({
                 email: value
             })
-        }
-        else if (id === 'username') {
+        } else if (id === 'username') {
             this.setState({
                 username: value
             })
@@ -60,12 +58,15 @@ class Nav extends Component {
 
     loginUser = (event) => {
         event.preventDefault();
-        axios.post('ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/user/login', {
+        axios.post('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/user/login', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
             email: this.state.email,
             password: this.state.password
         })
             .then(res => {
-                console.log("I got here");
+                console.log(res);
                 localStorage.setItem('jwt_access', res.headers.authorization);
                 let today = new Date();
                 today.setDate(today.getDate() + 12);
@@ -79,11 +80,22 @@ class Nav extends Component {
 
     createUser = (event) => {
         event.preventDefault();
-        axios.post('ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/user/register', {
-            email: this.state.email,
+        axios.post('ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/user', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
             username: this.state.username,
-            password: this.state.password
-        });
+            email: this.state.email,
+            name: "",
+            password: this.state.password,
+            isAdmin: false
+        })
+            .then(res => {
+                console.log("User Registered!");
+            })
+            .catch(error => {
+                console.log("User Register Failed: " + error);
+            });
     };
 
     render() {
@@ -121,7 +133,9 @@ class Nav extends Component {
                                     </div>
                                     <input type="submit" value="Sign In"/>
                                     <div className="modalFooter">
-                                        <button type="button" value="open" onClick={() => this.openRegisterModal()}> Register Account </button>
+                                        <button type="button" value="open"
+                                                onClick={() => this.openRegisterModal()}> Register Account
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -153,7 +167,8 @@ class Nav extends Component {
                                     </div>
                                     <input type="submit" value="Register"/>
                                     <div className="modalFooter">
-                                        <button type="button" value="open" onClick={() => this.openModal()}> Log In </button>
+                                        <button type="button" value="open" onClick={() => this.openModal()}> Log In
+                                        </button>
                                     </div>
                                 </form>
                             </div>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {Route, BrowserRouter as Router} from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
 import Nav from "./components/Nav";
@@ -7,14 +7,12 @@ import LoginIndex from "./components/LoginIndex";
 import Index from "./components/Index";
 import Groups from "./components/Groups";
 import Settings from "./components/Settings";
-import CreateAccount from "./components/CreateAccount";
-import ForgotPassword from "./components/ForgotPassword";
 import NavLoggedIn from "./components/NavLoggedIn";
 
 class App extends Component {
     componentWillMount() {
         if (localStorage.getItem('jwt_access') !== null) {
-            axios.get('https://clouddevdb.cpvkbdcnilcb.eu-west-2.rds.amazonaws.com/login', {
+            axios.get('https://clouddevdb.cpvkbdcnilcb.eu-west-2.rds.amazonaws.com/user/login', {
                 headers: {
                     Authorization: localStorage.getItem('jwt_access')
                 }
@@ -34,7 +32,7 @@ class App extends Component {
             // Logged In
             nav = <NavLoggedIn/>;
             return (
-                <BrowserRouter>
+                <Router>
                     <div className="wrapper">
                         {nav}
                         <div className="innerWrapper">
@@ -43,22 +41,20 @@ class App extends Component {
                             <Route exact path="/settings" component={Settings}/>
                         </div>
                     </div>
-                </BrowserRouter>
+                </Router>
             )
         } else {
             //Logged Out
             nav = <Nav/>;
             return (
-                <BrowserRouter>
+                <Router>
                     <div className="wrapper">
                         {nav}
                         <div className="innerWrapper">
                             <Route exact path="/" component={LoginIndex}/>
-                            <Route exact path="/create-account" component={CreateAccount}/>
-                            <Route exact path="/forgot-password" component={ForgotPassword}/>
                         </div>
                     </div>
-                </BrowserRouter>
+                </Router>
             );
         }
     }
