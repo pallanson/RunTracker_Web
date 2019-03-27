@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Route, BrowserRouter as Router} from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
 import './App.css';
 import axios from 'axios';
 import Nav from "./components/Nav";
@@ -8,6 +9,7 @@ import Index from "./components/Index";
 import Groups from "./components/Groups";
 import Settings from "./components/Settings";
 import NavLoggedIn from "./components/NavLoggedIn";
+const newHistory = createBrowserHistory();
 
 class App extends Component {
     componentWillMount() {
@@ -32,7 +34,7 @@ class App extends Component {
             // Logged In
             nav = <NavLoggedIn/>;
             return (
-                <Router>
+                <Router history={newHistory}>
                     <div className="wrapper">
                         {nav}
                         <div className="innerWrapper">
@@ -47,7 +49,7 @@ class App extends Component {
             //Logged Out
             nav = <Nav/>;
             return (
-                <Router>
+                <Router history={newHistory}>
                     <div className="wrapper">
                         {nav}
                         <div className="innerWrapper">
