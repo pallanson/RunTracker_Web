@@ -75,7 +75,9 @@ input[type="submit"] {
   width: 250px;
 }
 
-.btn_login {
+.btn_nav {
+  height: 40px;
+  width: 40px;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -83,7 +85,7 @@ input[type="submit"] {
   float: right;
 }
 
-.btn_login img {
+.btn_nav img {
   height: 40px;
   width: 40px;
 }

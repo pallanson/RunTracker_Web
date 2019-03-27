@@ -15,6 +15,7 @@ class App extends Component {
                 }
             })
                 .then(res => {
+                    console.log(res);
                 })
                 .catch(error => {
                     localStorage.removeItem('jwt_access');

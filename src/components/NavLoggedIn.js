@@ -22,7 +22,7 @@ class NavLoggedIn extends Component {
                     </h1>
 
                     <div>
-                        <button type="button" value="open" className="btn_logout" onClick={() => this.logoutUser()}>
+                        <button type="button" value="open" className="btn_nav" onClick={() => this.logoutUser()}>
                             <img src={require('../img/login_icon.png')} alt="Logout Icon"/>
                         </button>
                     </div>

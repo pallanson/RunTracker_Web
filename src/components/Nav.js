@@ -49,6 +49,10 @@ class Nav extends Component {
             this.setState({
                 username: value
             })
+        } else if (id === 'name') {
+            this.setState({
+                name: value
+            })
         } else if (id === 'password') {
             this.setState({
                 password: value
@@ -60,38 +64,44 @@ class Nav extends Component {
         event.preventDefault();
         axios.post('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/user/login', {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
-            email: this.state.email,
+            usernameOrEmail: this.state.email,
             password: this.state.password
         })
             .then(res => {
                 console.log(res);
                 localStorage.setItem('jwt_access', res.headers.authorization);
                 let today = new Date();
-                today.setDate(today.getDate() + 12);
+                today.setDate(today.getDate() + 1200);
                 document.cookie = "jwt_access" + res.headers.authorization + "; expires=" + today;
                 window.location.reload();
             })
             .catch(error => {
-                console.log("Log In Failed.")
+                console.log("Log In Failed." + error)
             });
     };
 
     createUser = (event) => {
         event.preventDefault();
-        axios.post('ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/user', {
+        axios.post('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/user/', {
             headers: {
                 'Content-Type': 'application/json'
             },
             username: this.state.username,
             email: this.state.email,
-            name: "",
+            name: this.state.name,
             password: this.state.password,
             isAdmin: false
         })
             .then(res => {
                 console.log("User Registered!");
+                console.log(res);
+                localStorage.setItem('jwt_access', res.headers.authorization);
+                let today = new Date();
+                today.setDate(today.getDate() + 1200);
+                document.cookie = "jwt_access" + res.headers.authorization + "; expires=" + today;
+                window.location.reload();
             })
             .catch(error => {
                 console.log("User Register Failed: " + error);
@@ -107,7 +117,7 @@ class Nav extends Component {
                     </h1>
 
                     <div>
-                        <button type="button" value="open" className="btn_login" onClick={() => this.openModal()}>
+                        <button type="button" value="open" className="btn_nav" onClick={() => this.openModal()}>
                             <img src={require('../img/login_icon.png')} alt="Login Icon"/>
                         </button>
                         <Modal
@@ -124,7 +134,7 @@ class Nav extends Component {
                                         <img src={require('../img/Sports-Running-icon.png')} alt="Run Away Logo"/>
                                     </div>
                                     <div className="singleInput">
-                                        <p>Email</p><br/>
+                                        <p>Username or Email</p><br/>
                                         <input type="text" id="email" onChange={this.handleChange}/>
                                     </div>
                                     <div className="singleInput">
@@ -143,7 +153,7 @@ class Nav extends Component {
                         <Modal
                             visible={this.state.visibleRegister}
                             width="400"
-                            height="525"
+                            height="600"
                             effect="fadeInDown"
                             onClickAway={() => this.closeRegisterModal()}
                         >
@@ -160,6 +170,10 @@ class Nav extends Component {
                                     <div className="singleInput">
                                         <p>Username</p><br/>
                                         <input type="text" id="username" onChange={this.handleChange}/>
+                                    </div>
+                                    <div className="singleInput">
+                                        <p>Full Name</p><br/>
+                                        <input type="text" id="name" onChange={this.handleChange}/>
                                     </div>
                                     <div className="singleInput">
                                         <p>Password</p><br/>
