@@ -7,10 +7,11 @@ import LoginIndex from "./components/LoginIndex";
 import NavLoggedIn from "./components/NavLoggedIn";
 
 class App extends Component {
-    componentWillMount() {
+    /*componentWillMount() {
         if (localStorage.getItem('jwt_access') !== null) {
-            axios.get('https://clouddevdb.cpvkbdcnilcb.eu-west-2.rds.amazonaws.com/user/login', {
+            axios.post('http://clouddevdb.cpvkbdcnilcb.eu-west-2.rds.amazonaws.com/user/login', {
                 headers: {
+                    'Content-Type': 'application/json',
                     Authorization: localStorage.getItem('jwt_access')
                 }
             })
@@ -22,7 +23,7 @@ class App extends Component {
                     window.location.href = "/";
                 })
         }
-    }
+    }*/
 
     render() {
         if (localStorage.getItem('jwt_access') !== null) {

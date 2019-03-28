@@ -70,11 +70,11 @@ class Nav extends Component {
             password: this.state.password
         })
             .then(res => {
-                console.log(res);
-                localStorage.setItem('jwt_access', res.headers.authorization);
+                console.log(res.data.token);
+                localStorage.setItem('jwt_access', res.data.token);
                 let today = new Date();
                 today.setDate(today.getDate() + 1200);
-                document.cookie = "jwt_access" + res.headers.authorization + "; expires=" + today;
+                document.cookie = "jwt_access" + res.data.token + "; expires=" + today;
                 window.location.reload();
             })
             .catch(error => {

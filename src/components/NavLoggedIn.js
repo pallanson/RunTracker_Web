@@ -10,7 +10,9 @@ class NavLoggedIn extends Component {
 
     // Logs the user out
     logoutUser = (event) => {
-        event.preventDefault();
+        console.log("Why hello there");
+        localStorage.removeItem('jwt_access');
+        window.location.reload();
     };
 
     render() {
