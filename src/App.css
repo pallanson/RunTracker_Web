@@ -85,6 +85,12 @@ input[type="submit"] {
   float: right;
 }
 
+.btn_nav svg{
+  height: 2.75em;
+  width: 2.75em;
+  margin-top: 2px;
+}
+
 .btn_nav img {
   height: 40px;
   width: 40px;

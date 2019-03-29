@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
+import {MdExitToApp} from 'react-icons/md';
 import '../App.css';
 
 class NavLoggedIn extends Component {
@@ -25,8 +26,8 @@ class NavLoggedIn extends Component {
 
                     <div>
                         <button type="button" value="open" className="btn_nav" onClick={() => this.logoutUser()}>
-                            <img src={require('../img/login_icon.png')} alt="Logout Icon"/>
-                        </button>
+                            <MdExitToApp/>
+                            </button>
                     </div>
                 </div>
             </header>
