@@ -83,6 +83,7 @@ input[type="submit"] {
   cursor: pointer;
   outline: none;
   float: right;
+  margin-left: 10px;
 }
 
 .btn_nav svg{

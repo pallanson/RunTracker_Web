@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
+import { MdPerson } from "react-icons/md";
 import '../App.css';
 import axios from 'axios';
 import Modal from 'react-awesome-modal';
@@ -118,7 +119,7 @@ class Nav extends Component {
 
                     <div>
                         <button type="button" value="open" className="btn_nav" onClick={() => this.openModal()}>
-                            <img src={require('../img/login_icon.png')} alt="Login Icon"/>
+                            <MdPerson/>
                         </button>
                         <Modal
                             visible={this.state.visible}

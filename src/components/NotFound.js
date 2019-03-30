@@ -1,20 +1,19 @@
 import React, {Component} from 'react';
 import '../App.css';
 
-class Index extends Component {
+class NotFound extends Component {
 
     render() {
         return (
             <div className="innerWrapper">
                 <br/>
-                <h1>Information</h1>
+                <h1>404</h1>
                 <br/>
                 <img src={require('../img/Sports-Running-icon.png')} alt="Logo" width={200}/>
-                <h2>You are Logged In!</h2><br/>
-                <br/><br/>
+                <h2>This is not the page you were looking for.</h2><br/>
             </div>
         )
     }
 }
 
-export default Index;
+export default NotFound;

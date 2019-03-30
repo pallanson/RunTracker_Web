@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
-import {MdExitToApp} from 'react-icons/md';
+import {Link} from 'react-router-dom';
+import {MdExitToApp, MdGroup, MdDirectionsRun, MdSettings, MdHome} from 'react-icons/md';
 import '../App.css';
 
 class NavLoggedIn extends Component {
-    state = {
-        "email": null,
-        "password": null
-    };
 
     // Logs the user out
     logoutUser = (event) => {
@@ -25,9 +22,31 @@ class NavLoggedIn extends Component {
                     </h1>
 
                     <div>
-                        <button type="button" value="open" className="btn_nav" onClick={() => this.logoutUser()}>
-                            <MdExitToApp/>
+                        <Link to="/logout">
+                            <button type="button" value="open" className="btn_nav">
+                                <MdExitToApp/>
                             </button>
+                        </Link>
+                        <Link to="/settings">
+                            <button type="button" value="open" className="btn_nav">
+                                <MdSettings/>
+                            </button>
+                        </Link>
+                        <Link to="/groups">
+                            <button type="button" value="open" className="btn_nav">
+                                <MdGroup/>
+                            </button>
+                        </Link>
+                        <Link to="/runs">
+                            <button type="button" value="open" className="btn_nav">
+                                <MdDirectionsRun/>
+                            </button>
+                        </Link>
+                        <Link to="/">
+                            <button type="button" value="open" className="btn_nav">
+                                <MdHome/>
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </header>
