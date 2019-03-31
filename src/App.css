@@ -24,6 +24,11 @@ a {
   margin: 0 auto;
  }
 
+.innerWrapper table {
+  width: 900px;
+  margin: 10px auto;
+}
+
 /* Header */
 .header {
   height: 60px;
@@ -86,7 +91,7 @@ input[type="submit"] {
   margin-left: 10px;
 }
 
-.btn_nav svg{
+.btn_nav svg {
   height: 2.75em;
   width: 2.75em;
   margin-top: 2px;
@@ -95,6 +100,21 @@ input[type="submit"] {
 .btn_nav img {
   height: 40px;
   width: 40px;
+}
+
+.btn_list {
+  height: 25px;
+  width: 25px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  margin-left: 0px;
+}
+
+.btn_list svg {
+  height: 1.75em;
+  width: 1.75em;
 }
 
 .modalLogo img {

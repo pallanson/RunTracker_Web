@@ -43,7 +43,6 @@ class App extends Component {
                                 <Route exact path="/groups" component={Groups}/>
                                 <Route exact path="/settings" component={Settings}/>
                                 <Route exact path="/logout" component={Logout}/>
-                                <Route component={404}/>
                             </Switch>
                         </div>
                     </div>
