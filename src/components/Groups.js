@@ -70,6 +70,7 @@ class Groups extends Component {
                     </tr>))}
                     </tbody>
                 </table>
+
             </div>
         )
     }
