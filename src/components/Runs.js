@@ -18,7 +18,7 @@ class Runs extends Component {
     }
 
     componentDidMount() {
-        //Get users information
+        //Get list of user's runs
         axios.get('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/run/' + jwt_decode(localStorage.getItem('jwt_access')).username, {
             headers: {
                 'Content-Type': 'application/json',
