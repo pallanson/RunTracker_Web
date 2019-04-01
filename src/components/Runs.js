@@ -39,7 +39,7 @@ class Runs extends Component {
         this.setState({
             visible: true,
             id: event.run_id,
-            date: event.startTime,
+            date: event.startTime.substring(0, 10),
             duration: event.timeInSeconds,
         });
         console.log(event)
@@ -114,12 +114,13 @@ class Runs extends Component {
                     onClickAway={() => this.closeModal()}
                 >
                     <div className="modal">
-                        <h1>Run #{this.state.id}</h1>
-                        <p>Google Maps Image Here</p>
-                        <p>{this.state.date}</p>
-                        <p>{this.state.duration} Seconds</p>
+                        <h1>Run #{this.state.id}</h1><br/><br/>
+                        <p>Google Maps Image Here</p><br/>
+                        <p><b>Date:</b> {this.state.date}</p><br/>
+                        <p><b>Run Duration:</b> {this.state.duration} Seconds</p>
                         <div className="modalFooter">
-                            <button type="button" value="open" onClick={(event) => this.deleteRun(this.state.id, event)}>
+                            <button type="button" value="open" className="btn_list"
+                                    onClick={(event) => this.deleteRun(this.state.id, event)}>
                                 <MdDelete/>
                             </button>
                         </div>

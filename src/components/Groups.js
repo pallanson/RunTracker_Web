@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../App.css';
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import {MdDelete, MdZoomIn} from "react-icons/md";
+import {MdDelete, MdZoomIn, MdAdd} from "react-icons/md";
 import Modal from 'react-awesome-modal';
 
 class Groups extends Component {
@@ -11,6 +11,7 @@ class Groups extends Component {
         this.state = {
             groups: [],
             visible: false,
+            groupVisible: false,
             id: '0',
             name: '',
             admin: '',
@@ -41,6 +42,7 @@ class Groups extends Component {
     openModal = (event) => {
         this.setState({
             visible: true,
+            groupVisible: false,
             id: event.group_id,
             name: event.groupName,
             admin: event.admin,
@@ -52,9 +54,41 @@ class Groups extends Component {
 
     closeModal() {
         this.setState({
-            visible: false
+            visible: false,
         });
     }
+
+    createGroup = (event) => {
+        console.log(jwt_decode(localStorage.getItem('jwt_access')).username);
+        console.log(this.state.groupName);
+        axios.post('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/group/', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('jwt_access'),
+            },
+            username: jwt_decode(localStorage.getItem('jwt_access')).username,
+            groupName: this.state.groupName,
+        })
+            .then(res => {
+                console.log(res);
+            })
+            .catch(error => {
+                console.error("Creating Group Failed!" + error)
+            });
+        console.log(event)
+        // Set state here?
+    }
+
+    handleChange = (event) => {
+        const target = event.target;
+        let id = target.id;
+        let value = target.value;
+        if (id === 'name') {
+            this.setState({
+                groupName: value
+            })
+        }
+    };
 
     deleteGroup = (event) => {
         console.log(this.state.currentUser);
@@ -83,10 +117,16 @@ class Groups extends Component {
         return (
             <div className="innerWrapper">
                 <br/>
-                <h1>Groups Page!</h1>
+                <h1>Groups</h1>
                 <br/>
-                <img src={require('../img/Sports-Running-icon.png')} alt="Logo" width={200}/>
-                <h2>You are Grouped In!</h2><br/>
+                <form onSubmit={() => this.createGroup()}>
+                    <h1>Create a New Group</h1><br/>
+                    <p className="label_create">Group Name</p>
+                    <input type="text" id="name" className="text_create" onChange={this.handleChange}/>
+                    <input type="submit" value="Create New Group" className="btn_create"/>
+                </form>
+
+                <br/><br/><br/>
                 <table>
                     <tbody>
                     <tr>
@@ -118,12 +158,30 @@ class Groups extends Component {
                     onClickAway={() => this.closeModal()}
                 >
                     <div className="modal">
-                        <h1>Group #{this.state.id}</h1>
+                        <h1>Group {this.state.id}</h1>
                         <h2>{this.state.name}</h2><br/><br/>
+                        <p><b>Members:</b></p>
                         {this.state.members.map((member, i) => (<p>{member}</p>))}<br/>
-                        <p>Admin: {this.state.admin}</p>
+                        <p><b>Admin:</b> {this.state.admin}</p>
                         <div className="modalFooter">
-                            <button type="button" value="open"
+                            <button type="button" value="open" className="btn_list"
+                                    onClick={(event) => this.deleteGroup(this, event)}>
+                                <MdDelete/>
+                            </button>
+                        </div>
+                    </div>
+                </Modal>
+                <Modal
+                    visible={this.state.groupVisible}
+                    width="500"
+                    height="600"
+                    effect="fadeInDown"
+                    onClickAway={() => this.closeGroupModal()}
+                >
+                    <div className="modal">
+                        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                        <div className="modalFooter">
+                            <button type="button" value="open" className="btn_list"
                                     onClick={(event) => this.deleteGroup(this, event)}>
                                 <MdDelete/>
                             </button>

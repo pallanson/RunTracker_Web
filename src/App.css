@@ -117,6 +117,30 @@ input[type="submit"] {
   width: 1.75em;
 }
 
+.btn_create {
+  height: 25px !important;
+  width: 150px !important;
+  background-color: #dedede;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  margin-left: 10px;
+}
+
+.label_create {
+  margin-right: 300px;
+}
+
+.text_create {
+  height: 25px !important;
+  width: 250px !important;
+  background-color: #f0f0f0;
+  border: #dedede 1px solid;
+  cursor: pointer;
+  outline: none;
+  margin-left: 10px;
+}
+
 .modalLogo img {
   height: 150px;
   width: 150px;
