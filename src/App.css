@@ -185,6 +185,16 @@ input[type="submit"] {
   outline: none;
 }
 
+.modalList input[type="submit"] {
+  height: 25px !important;
+  width: 25px !important;
+  background-color: #f0f0f0;
+  border: #dedede 1px solid;
+  cursor: pointer;
+  outline: none;
+  float: right;
+}
+
 /* Admin Stuff */
 .adminTable {
   width: 300px;

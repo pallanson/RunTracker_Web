@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../App.css';
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import {MdDelete, MdZoomIn} from "react-icons/md";
+import {MdAdd, MdDelete, MdZoomIn} from "react-icons/md";
 import Modal from 'react-awesome-modal';
 
 class Groups extends Component {
@@ -75,7 +75,6 @@ class Groups extends Component {
             });
         console.log(jwt_decode(localStorage.getItem('jwt_access')).username);
         console.log(this.state.groupName);
-        console.log(event);
     }
 
     handleChange = (event) => {
@@ -125,12 +124,10 @@ class Groups extends Component {
                 <br/>
                 <h1>Groups</h1>
                 <br/>
-                <form onSubmit={() => this.createGroup()}>
-                    <h1>Create a New Group</h1><br/>
-                    <p className="label_create">Group Name</p>
-                    <input type="text" id="username" className="text_create" onChange={this.handleChange}/>
-                    <input type="submit" value="Create New Group" className="btn_create"/>
-                </form>
+                <input type="text" id="username" className="text_create" onChange={this.handleChange}/>
+                <button onClick={this.createGroup.bind(this)}>
+                    <MdAdd/>
+                </button>
 
                 <br/><br/><br/>
                 <table>
@@ -170,30 +167,10 @@ class Groups extends Component {
                         {this.state.members.map((member, i) =>
                             <form onSubmit={(event) => this.deleteMember(this, event)} className="modalList">
                                 <p className="modalList">{member}</p>
-                                <input type="submit">
-                                    <button type="button" value="open" className="btn_modalList">
-                                        <MdDelete/>
-                                    </button>
-                                </input>
+                                <input type="submit" className="delete_member" value="X"/>
                             </form>
                         )}<br/>
                         <p><b>Admin:</b> {this.state.admin}</p>
-                        <div className="modalFooter">
-                            <button type="button" value="open" className="btn_list"
-                                    onClick={(event) => this.deleteGroup(this, event)}>
-                                <MdDelete/>
-                            </button>
-                        </div>
-                    </div>
-                </Modal>
-                <Modal
-                    visible={this.state.groupVisible}
-                    width="500"
-                    height="600"
-                    effect="fadeInDown"
-                    onClickAway={() => this.closeGroupModal()}
-                >
-                    <div className="modal">
                         <div className="modalFooter">
                             <button type="button" value="open" className="btn_list"
                                     onClick={(event) => this.deleteGroup(this, event)}>
