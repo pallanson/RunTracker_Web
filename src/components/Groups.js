@@ -124,6 +124,7 @@ class Groups extends Component {
                 <br/>
                 <h1>Groups</h1>
                 <br/>
+                <img src={require('../img/Sports-Running-icon.png')} alt="Logo" width={200}/>
                 <p className="label_create">Group Name</p>
                 <input type="text" id="username" className="text_create" onChange={this.handleChange}/>
                 <button className="btn_create" onClick={this.createGroup.bind(this)}>

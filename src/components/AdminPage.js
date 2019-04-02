@@ -78,12 +78,6 @@ class AdminPage extends Component {
         }
     }
 
-    closeModal() {
-        this.setState({
-            errorVisible: false,
-        });
-    }
-
     deleteGroup = (event) => {
         console.log(this.state.currentUser);
         console.log(event);
@@ -139,6 +133,9 @@ class AdminPage extends Component {
     render() {
         return (
             <div className="adminPage">
+                <br/>
+                <h1>Admin Panel</h1>
+                <br/><br/>
                 <div className="adminTable">
                     <h2>Groups</h2>
                     <table>
@@ -210,7 +207,6 @@ class AdminPage extends Component {
                     width="400"
                     height="200"
                     effect="fadeInDown"
-                    onClickAway={() => this.closeModal()}
                 >
                     <div className="modal">
                         <h1 className="error">Unauthorized!</h1>

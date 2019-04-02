@@ -114,7 +114,7 @@ class Nav extends Component {
             <header className="header">
                 <div className="innerWrapper">
                     <h1>
-                        Run Away
+                        RunTracker
                     </h1>
 
                     <div>

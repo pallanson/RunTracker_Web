@@ -18,7 +18,7 @@ class NavLoggedIn extends Component {
             <header className="header">
                 <div className="innerWrapper">
                     <h1>
-                        Run Away
+                        RunTracker
                     </h1>
 
                     <div>
@@ -26,11 +26,6 @@ class NavLoggedIn extends Component {
                                 onClick={this.logoutUser}>
                             <MdExitToApp/>
                         </button>
-                        <Link to="/settings">
-                            <button type="button" value="open" className="btn_nav">
-                                <MdSettings/>
-                            </button>
-                        </Link>
                         <Link to="/groups">
                             <button type="button" value="open" className="btn_nav">
                                 <MdGroup/>
