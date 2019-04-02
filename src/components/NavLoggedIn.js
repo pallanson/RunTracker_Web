@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
-import {MdExitToApp, MdGroup, MdDirectionsRun, MdSettings, MdHome} from 'react-icons/md';
+import {MdExitToApp, MdGroup, MdDirectionsRun, MdSettings, MdHome, MdVpnKey} from 'react-icons/md';
 import '../App.css';
 
 class NavLoggedIn extends Component {
@@ -22,11 +22,10 @@ class NavLoggedIn extends Component {
                     </h1>
 
                     <div>
-                        <Link to="/logout">
-                            <button type="button" value="open" className="btn_nav">
-                                <MdExitToApp/>
-                            </button>
-                        </Link>
+                        <button type="button" value="open" className="btn_nav"
+                                onClick={this.logoutUser}>
+                            <MdExitToApp/>
+                        </button>
                         <Link to="/settings">
                             <button type="button" value="open" className="btn_nav">
                                 <MdSettings/>
@@ -45,6 +44,11 @@ class NavLoggedIn extends Component {
                         <Link to="/">
                             <button type="button" value="open" className="btn_nav">
                                 <MdHome/>
+                            </button>
+                        </Link>
+                        <Link to="/admin">
+                            <button type="button" value="open" className="btn_nav">
+                                <MdVpnKey/>
                             </button>
                         </Link>
                     </div>

@@ -5,9 +5,9 @@ import Nav from "./components/Nav";
 import Runs from "./components/Runs";
 import Groups from "./components/Groups";
 import Settings from "./components/Settings";
-import Logout from "./components/Logout";
 import LoginIndex from "./components/LoginIndex";
 import Index from "./components/Index";
+import AdminPage from "./components/AdminPage";
 import NavLoggedIn from "./components/NavLoggedIn";
 
 class App extends Component {
@@ -42,7 +42,7 @@ class App extends Component {
                                 <Route exact path="/runs" component={Runs}/>
                                 <Route exact path="/groups" component={Groups}/>
                                 <Route exact path="/settings" component={Settings}/>
-                                <Route exact path="/logout" component={Logout}/>
+                                <Route exact path="/admin" component={AdminPage}/>
                             </Switch>
                         </div>
                     </div>
@@ -56,6 +56,10 @@ class App extends Component {
                         <Nav/>
                         <div className="innerWrapper">
                             <Route exact path="/" component={LoginIndex}/>
+                            <Route exact path="/runs" component={LoginIndex}/>
+                            <Route exact path="/groups" component={LoginIndex}/>
+                            <Route exact path="/settings" component={LoginIndex}/>
+                            <Route exact path="/admin" component={LoginIndex}/>
                         </div>
                     </div>
                 </Router>

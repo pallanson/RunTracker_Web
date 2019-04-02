@@ -127,8 +127,34 @@ input[type="submit"] {
   margin-left: 10px;
 }
 
+.btn_modalList {
+  height: 20px;
+  width: 20px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  float: right;
+}
+
+.btn_modalList svg {
+  height: 1.75em;
+  width: 1.75em;
+}
+
 .label_create {
   margin-right: 300px;
+}
+
+.modalList {
+  height: 20px !important;
+  width: 200px;
+  margin: 5px auto;
+}
+
+.modalList p {
+  width: 0px;
+  float: left;
 }
 
 .text_create {
@@ -157,4 +183,22 @@ input[type="submit"] {
   border: none;
   cursor: pointer;
   outline: none;
+}
+
+/* Admin Stuff */
+.adminTable {
+  width: 300px;
+  float: left;
+  margin: 10px 10px 0 10px;
+}
+
+.adminTable table{
+  width: 300px;
+  float: left;
+}
+
+.adminPage {
+  height: 50px;
+  width: 960px;
+  margin: 0 auto;
 }

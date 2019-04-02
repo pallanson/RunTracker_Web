@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../App.css';
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import {MdDelete, MdZoomIn, MdAdd} from "react-icons/md";
+import {MdDelete, MdZoomIn} from "react-icons/md";
 import Modal from 'react-awesome-modal';
 
 class Groups extends Component {
@@ -59,15 +59,13 @@ class Groups extends Component {
     }
 
     createGroup = (event) => {
-        console.log(jwt_decode(localStorage.getItem('jwt_access')).username);
-        console.log(this.state.groupName);
         axios.post('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/group/', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('jwt_access'),
             },
             username: jwt_decode(localStorage.getItem('jwt_access')).username,
-            groupName: this.state.groupName,
+            groupName: this.state.groupName
         })
             .then(res => {
                 console.log(res);
@@ -75,15 +73,16 @@ class Groups extends Component {
             .catch(error => {
                 console.error("Creating Group Failed!" + error)
             });
-        console.log(event)
-        // Set state here?
+        console.log(jwt_decode(localStorage.getItem('jwt_access')).username);
+        console.log(this.state.groupName);
+        console.log(event);
     }
 
     handleChange = (event) => {
         const target = event.target;
         let id = target.id;
         let value = target.value;
-        if (id === 'name') {
+        if (id === 'username') {
             this.setState({
                 groupName: value
             })
@@ -113,6 +112,13 @@ class Groups extends Component {
         }
     }
 
+    deleteMember = (event) => {
+        console.log(this.state.currentUser);
+        console.log(this.state.id);
+        console.log(this.state.admin);
+        console.log()
+    }
+
     render() {
         return (
             <div className="innerWrapper">
@@ -122,7 +128,7 @@ class Groups extends Component {
                 <form onSubmit={() => this.createGroup()}>
                     <h1>Create a New Group</h1><br/>
                     <p className="label_create">Group Name</p>
-                    <input type="text" id="name" className="text_create" onChange={this.handleChange}/>
+                    <input type="text" id="username" className="text_create" onChange={this.handleChange}/>
                     <input type="submit" value="Create New Group" className="btn_create"/>
                 </form>
 
@@ -161,7 +167,16 @@ class Groups extends Component {
                         <h1>Group {this.state.id}</h1>
                         <h2>{this.state.name}</h2><br/><br/>
                         <p><b>Members:</b></p>
-                        {this.state.members.map((member, i) => (<p>{member}</p>))}<br/>
+                        {this.state.members.map((member, i) =>
+                            <form onSubmit={(event) => this.deleteMember(this, event)} className="modalList">
+                                <p className="modalList">{member}</p>
+                                <input type="submit">
+                                    <button type="button" value="open" className="btn_modalList">
+                                        <MdDelete/>
+                                    </button>
+                                </input>
+                            </form>
+                        )}<br/>
                         <p><b>Admin:</b> {this.state.admin}</p>
                         <div className="modalFooter">
                             <button type="button" value="open" className="btn_list"
@@ -179,7 +194,6 @@ class Groups extends Component {
                     onClickAway={() => this.closeGroupModal()}
                 >
                     <div className="modal">
-                        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                         <div className="modalFooter">
                             <button type="button" value="open" className="btn_list"
                                     onClick={(event) => this.deleteGroup(this, event)}>
