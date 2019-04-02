@@ -59,23 +59,23 @@ class Groups extends Component {
     }
 
     createGroup = (event) => {
-        axios.post('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/group/', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('jwt_access'),
-            },
+        let headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('jwt_access'),
+        };
+        let data = {
             username: jwt_decode(localStorage.getItem('jwt_access')).username,
             groupName: this.state.groupName
-        })
+        };
+        axios.post('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/group', data, {headers : headers})
             .then(res => {
                 console.log(res);
+                window.location.reload();
             })
             .catch(error => {
                 console.error("Creating Group Failed!" + error)
             });
-        console.log(jwt_decode(localStorage.getItem('jwt_access')).username);
-        console.log(this.state.groupName);
-    }
+    };
 
     handleChange = (event) => {
         const target = event.target;
@@ -124,12 +124,12 @@ class Groups extends Component {
                 <br/>
                 <h1>Groups</h1>
                 <br/>
+                <p className="label_create">Group Name</p>
                 <input type="text" id="username" className="text_create" onChange={this.handleChange}/>
-                <button onClick={this.createGroup.bind(this)}>
-                    <MdAdd/>
+                <button className="btn_create" onClick={this.createGroup.bind(this)}>
+                    Create Group
                 </button>
-
-                <br/><br/><br/>
+                <br/><br/>
                 <table>
                     <tbody>
                     <tr>

@@ -4,6 +4,7 @@ import axios from "axios";
 import {MdDelete, MdZoomIn} from 'react-icons/md';
 import jwt_decode from 'jwt-decode';
 import Modal from 'react-awesome-modal';
+import {GoogleApiWrapper, Map, Polyline} from 'google-maps-react';
 
 class Runs extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class Runs extends Component {
             id: '0',
             date: '',
             duration: '',
+            locations: [],
         };
     }
 
@@ -37,14 +39,26 @@ class Runs extends Component {
     }
 
     openModal = (event) => {
+        let fixedLocations = event.locations;
+        // Make Location Data Usable with Google Maps
+        for (let i = 0; i < event.locations.length; i++) {
+            event.locations[i].lat = event.locations[i].latitude;
+            delete event.locations[i].latitude;
+            event.locations[i].lng = event.locations[i].longitude;
+            delete event.locations[i].longitude;
+            delete event.locations[i].timestamp;
+        }
+        console.log(fixedLocations);
         this.setState({
             visible: true,
             id: event.run_id,
             date: event.startTime.substring(0, 10),
             duration: event.timeInSeconds,
+            locations: event.locations,
+            x: fixedLocations[0].lat,
+            y: fixedLocations[0].lng,
         });
-        console.log(event)
-        // Set state here?
+        console.log(event.locations);
     }
 
     closeModal() {
@@ -54,29 +68,18 @@ class Runs extends Component {
     }
 
     deleteRun = (event) => {
-        axios.delete('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/run/' + event, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('jwt_access'),
-            },
-        })
-            .then(res => {
-                console.log(res);
-                window.location.reload();
-            })
-            .catch(error => {
-                console.log("Retrieving Runs Failed." + error)
-            });
+        console.log(this.state.x);
+        console.log(this.state.y);
+        console.log(this.state.locations);
     }
 
     render() {
         return (
             <div className="innerWrapper">
                 <br/>
-                <h1>Runs Page!</h1>
+                <h1>Runs</h1>
                 <br/>
                 <img src={require('../img/Sports-Running-icon.png')} alt="Logo" width={200}/>
-                <h2>You are Run Paged In!</h2><br/><br/><br/>
                 <table>
                     <tbody>
                     <tr>
@@ -107,22 +110,36 @@ class Runs extends Component {
                 </table>
                 <Modal
                     visible={this.state.visible}
-                    width="400"
-                    height="475"
+                    width="900"
+                    height="800"
                     effect="fadeInDown"
                     onClickAway={() => this.closeModal()}
                 >
                     <div className="modal">
-                        <h1>Run #{this.state.id}</h1><br/><br/>
-                        <p>Google Maps Image Here</p><br/>
-                        <p><b>Date:</b> {this.state.date}</p><br/>
-                        <p><b>Run Duration:</b> {this.state.duration} Seconds</p>
-                        <div className="modalFooter">
-                            <button type="button" value="open" className="btn_list"
-                                    onClick={(event) => this.deleteRun(this.state.id, event)}>
-                                <MdDelete/>
-                            </button>
+                        <h1>Run #{this.state.id}</h1>
+                        <button type="button" value="open" className="btn_list"
+                                onClick={(event) => this.deleteRun(this.state.id, event)}>
+                            <MdDelete/>
+                        </button>
+                        <br/>
+                        <div className="googleMap">
+                            <Map google={this.props.google}
+                                 style={{width: '600px', height: '600px'}}
+                                 center={{
+                                     lat: this.state.x,
+                                     lng: this.state.y
+                                 }}
+                                 zoom={16}>
+                                <Polyline
+                                    path={this.state.locations}
+                                    geodesic={true}
+                                    strokeColor="#00b99f"
+                                    strokeOpacity={1}
+                                    strokeWeight={4}/>
+                            </Map>
                         </div>
+                        <p><b>Date:</b> {this.state.date}</p>
+                        <p><b>Run Duration:</b> {this.state.duration} Seconds</p>
                     </div>
                 </Modal>
             </div>
@@ -130,4 +147,6 @@ class Runs extends Component {
     }
 }
 
-export default Runs;
+export default GoogleApiWrapper({
+    apiKey: ('AIzaSyCLdiT7JPD6NYsNzTtIqq4K_HNG66f-UvQ')
+})(Runs);

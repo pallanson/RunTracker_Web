@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
-import {MdExitToApp, MdGroup, MdDirectionsRun, MdSettings, MdHome, MdVpnKey} from 'react-icons/md';
+import {MdExitToApp, MdGroup, MdDirectionsRun, MdSettings, MdVpnKey} from 'react-icons/md';
 import '../App.css';
 
 class NavLoggedIn extends Component {
