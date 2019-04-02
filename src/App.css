@@ -15,6 +15,10 @@ a {
   text-decoration: none;
 }
 
+.error {
+  color: red;
+}
+
 .wrapper {
   width: 100%;
   text-align: center;

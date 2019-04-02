@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import '../App.css';
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import {MdDelete} from "react-icons/md";
+import {MdDelete, MdDone, MdVpnKey} from "react-icons/md";
+import Modal from "react-awesome-modal";
+import {Link} from "react-router-dom";
 
 class AdminPage extends Component {
     constructor(props) {
@@ -12,6 +14,7 @@ class AdminPage extends Component {
             runs: [],
             users: [],
             currentUser: jwt_decode(localStorage.getItem('jwt_access')).username,
+            errorVisible: false,
         };
     }
 
@@ -68,7 +71,17 @@ class AdminPage extends Component {
                 });
         } else {
             // Go back to previous page / index page
+            this.setState({
+                    errorVisible: true
+                }
+            )
         }
+    }
+
+    closeModal() {
+        this.setState({
+            errorVisible: false,
+        });
     }
 
     deleteGroup = (event) => {
@@ -192,6 +205,23 @@ class AdminPage extends Component {
                         </tbody>
                     </table>
                 </div>
+                <Modal
+                    visible={this.state.errorVisible}
+                    width="400"
+                    height="200"
+                    effect="fadeInDown"
+                    onClickAway={() => this.closeModal()}
+                >
+                    <div className="modal">
+                        <h1 className="error">Unauthorized!</h1>
+                        <h2 className="error">You are not authorized to view this page.</h2>
+                        <Link to="/runs">
+                            <button type="button" value="open" className="btn_nav">
+                                <MdDone/>
+                            </button>
+                        </Link>
+                    </div>
+                </Modal>
             </div>
         )
     }
