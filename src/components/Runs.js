@@ -19,6 +19,7 @@ class Runs extends Component {
 
     componentDidMount() {
         //Get list of user's runs
+        console.log(localStorage.getItem('jwt_access'));
         axios.get('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/run/' + jwt_decode(localStorage.getItem('jwt_access')).username, {
             headers: {
                 'Content-Type': 'application/json',
@@ -80,17 +81,15 @@ class Runs extends Component {
                     <tbody>
                     <tr>
                         <th>ID</th>
-                        <th>Location</th>
-                        <th>Start Time</th>
+                        <th>Date</th>
                         <th>Duration</th>
                         <th>Delete</th>
                         <th>View</th>
                     </tr>
                     {this.state.runs.map((item, i) => (<tr>
                         <td>{item.run_id}</td>
-                        <td>Hell</td>
-                        <td>{item.startTime}</td>
-                        <td>{item.timeInSeconds}</td>
+                        <td>{item.startTime.substring(0, 10)}</td>
+                        <td>{item.timeInSeconds} Seconds</td>
                         <td>
                             <button type="button" value="open" className="btn_list"
                                     onClick={(event) => this.deleteRun(item.run_id, event)}>

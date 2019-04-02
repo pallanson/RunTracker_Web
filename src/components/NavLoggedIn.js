@@ -41,11 +41,6 @@ class NavLoggedIn extends Component {
                                 <MdDirectionsRun/>
                             </button>
                         </Link>
-                        <Link to="/">
-                            <button type="button" value="open" className="btn_nav">
-                                <MdHome/>
-                            </button>
-                        </Link>
                         <Link to="/admin">
                             <button type="button" value="open" className="btn_nav">
                                 <MdVpnKey/>

@@ -38,7 +38,7 @@ class App extends Component {
                         <NavLoggedIn/>
                         <div className="innerWrapper">
                             <Switch>
-                                <Route exact path="/" component={Index}/>
+                                <Route exact path="/" component={Runs}/>
                                 <Route exact path="/runs" component={Runs}/>
                                 <Route exact path="/groups" component={Groups}/>
                                 <Route exact path="/settings" component={Settings}/>

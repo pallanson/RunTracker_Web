@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../App.css';
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import {MdDelete, MdZoomIn} from "react-icons/md";
+import {MdDelete} from "react-icons/md";
 
 class AdminPage extends Component {
     constructor(props) {
