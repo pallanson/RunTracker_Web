@@ -6,7 +6,6 @@ import Runs from "./components/Runs";
 import Groups from "./components/Groups";
 import Settings from "./components/Settings";
 import LoginIndex from "./components/LoginIndex";
-import Index from "./components/Index";
 import AdminPage from "./components/AdminPage";
 import NavLoggedIn from "./components/NavLoggedIn";
 

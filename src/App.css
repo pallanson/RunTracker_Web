@@ -7,6 +7,7 @@
 body {
   font-family: Arial, Helvetiva, sans-serif;
   line-height: 1.4;
+  background-color: #f2f2f2;
 }
 
 a {
@@ -27,13 +28,19 @@ a {
 .innerWrapper table {
   width: 900px;
   margin: 10px auto;
+  border: #00f0df 1px solid;
+}
+
+.innerWrapper table th {
+  background-color: #00b99f;
 }
 
 /* Header */
 .header {
   height: 60px;
   padding: 8px;
-  background-color: #00574B;
+  background-color: #00b99f;
+  border-bottom: #00f0df 1px solid;
 }
 
 .header h1 {
@@ -193,6 +200,12 @@ input[type="submit"] {
   cursor: pointer;
   outline: none;
   float: right;
+}
+
+.googleMap {
+  height: 600px;
+  width: 600px;
+  margin: 0 auto 10px;
 }
 
 /* Admin Stuff */
