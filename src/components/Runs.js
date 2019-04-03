@@ -22,7 +22,7 @@ class Runs extends Component {
     componentDidMount() {
         //Get list of user's runs
         console.log(localStorage.getItem('jwt_access'));
-        axios.get('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/run/' + jwt_decode(localStorage.getItem('jwt_access')).username, {
+        axios.get('http://ec2-13-53-40-173.eu-north-1.compute.amazonaws.com:5000/run/' + jwt_decode(localStorage.getItem('jwt_access')).username, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('jwt_access'),
@@ -68,9 +68,19 @@ class Runs extends Component {
     }
 
     deleteRun = (event) => {
-        console.log(this.state.x);
-        console.log(this.state.y);
-        console.log(this.state.locations);
+        axios.delete('http://ec2-13-53-40-173.eu-north-1.compute.amazonaws.com:5000/run/' + event, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('jwt_access'),
+            },
+        })
+            .then(res => {
+                console.log(res);
+                window.location.reload();
+            })
+            .catch(error => {
+                console.log("Retrieving Runs Failed." + error)
+            });
     }
 
     render() {
@@ -110,8 +120,8 @@ class Runs extends Component {
                 </table>
                 <Modal
                     visible={this.state.visible}
-                    width="900"
-                    height="800"
+                    width="700"
+                    height="600"
                     effect="fadeInDown"
                     onClickAway={() => this.closeModal()}
                 >
@@ -124,7 +134,7 @@ class Runs extends Component {
                         <br/>
                         <div className="googleMap">
                             <Map google={this.props.google}
-                                 style={{width: '600px', height: '600px'}}
+                                 style={{width: '400px', height: '400px'}}
                                  center={{
                                      lat: this.state.x,
                                      lng: this.state.y

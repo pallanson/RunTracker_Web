@@ -22,7 +22,7 @@ class Groups extends Component {
 
     componentWillMount() {
         //Get list of user's groups
-        axios.get('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/group/user/' + jwt_decode(localStorage.getItem('jwt_access')).username, {
+        axios.get('http://ec2-13-53-40-173.eu-north-1.compute.amazonaws.com:5000/group/user/' + jwt_decode(localStorage.getItem('jwt_access')).username, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('jwt_access'),
@@ -67,7 +67,7 @@ class Groups extends Component {
             username: jwt_decode(localStorage.getItem('jwt_access')).username,
             groupName: this.state.groupName
         };
-        axios.post('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/group', data, {headers : headers})
+        axios.post('http://ec2-13-53-40-173.eu-north-1.compute.amazonaws.com:5000/group', data, {headers : headers})
             .then(res => {
                 console.log(res);
                 window.location.reload();
@@ -93,7 +93,7 @@ class Groups extends Component {
         console.log(this.state.id);
         console.log(this.state.admin);
         if (this.state.currentUser === this.state.admin) {
-            axios.delete('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/group/' + this.state.id, {
+            axios.delete('http://ec2-13-53-40-173.eu-north-1.compute.amazonaws.com:5000/group/' + this.state.id, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + localStorage.getItem('jwt_access'),
@@ -116,7 +116,7 @@ class Groups extends Component {
         console.log(this.state.id);
         console.log(event);
         if (this.state.currentUser === this.state.admin) {
-            axios.delete('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/group/' + this.state.id + "/" + event, {
+            axios.delete('http://ec2-13-53-40-173.eu-north-1.compute.amazonaws.com:5000/group/' + this.state.id + "/" + event, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + localStorage.getItem('jwt_access'),

@@ -63,7 +63,7 @@ class Nav extends Component {
 
     loginUser = (event) => {
         event.preventDefault();
-        axios.post('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/user/login', {
+        axios.post('http://ec2-13-53-40-173.eu-north-1.compute.amazonaws.com:5000/user/login', {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -85,7 +85,7 @@ class Nav extends Component {
 
     createUser = (event) => {
         event.preventDefault();
-        axios.post('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/user/', {
+        axios.post('http://ec2-13-53-40-173.eu-north-1.compute.amazonaws.com:5000/user/', {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -98,6 +98,7 @@ class Nav extends Component {
             .then(res => {
                 console.log("User Registered!");
                 console.log(res);
+                localStorage.removeItem('jwt_access');
                 localStorage.setItem('jwt_access', res.headers.authorization);
                 let today = new Date();
                 today.setDate(today.getDate() + 1200);

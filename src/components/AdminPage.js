@@ -22,7 +22,7 @@ class AdminPage extends Component {
         //Check if User is Admin
         if (jwt_decode(localStorage.getItem('jwt_access')).isAdmin) {
             // Get List of Groups
-            axios.get('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/group/', {
+            axios.get('http://ec2-13-53-40-173.eu-north-1.compute.amazonaws.com:5000/group/', {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + localStorage.getItem('jwt_access'),
@@ -38,7 +38,7 @@ class AdminPage extends Component {
                     console.log("Retrieving Groups Failed." + error)
                 });
             // Get List of Runs
-            axios.get('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/run/', {
+            axios.get('http://ec2-13-53-40-173.eu-north-1.compute.amazonaws.com:5000/run/', {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + localStorage.getItem('jwt_access'),
@@ -54,7 +54,7 @@ class AdminPage extends Component {
                     console.log("Retrieving Groups Failed." + error)
                 });
             // Get List of Users
-            axios.get('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/user/', {
+            axios.get('http://ec2-13-53-40-173.eu-north-1.compute.amazonaws.com:5000/user/', {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + localStorage.getItem('jwt_access'),
@@ -81,7 +81,7 @@ class AdminPage extends Component {
     deleteGroup = (event) => {
         console.log(this.state.currentUser);
         console.log(event);
-        axios.delete('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/group/' + event, {
+        axios.delete('http://ec2-13-53-40-173.eu-north-1.compute.amazonaws.com:5000/group/' + event, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('jwt_access'),
@@ -98,7 +98,7 @@ class AdminPage extends Component {
 
     deleteRun = (event) => {
         console.log(event);
-        axios.delete('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/run/' + event, {
+        axios.delete('http://ec2-13-53-40-173.eu-north-1.compute.amazonaws.com:5000/run/' + event, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('jwt_access'),
@@ -115,7 +115,7 @@ class AdminPage extends Component {
 
     deleteUser = (event) => {
         console.log(event);
-        axios.delete('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/user/' + event, {
+        axios.delete('http://ec2-13-53-40-173.eu-north-1.compute.amazonaws.com:5000/user/' + event, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('jwt_access'),
