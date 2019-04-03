@@ -114,8 +114,24 @@ class Groups extends Component {
     deleteMember = (event) => {
         console.log(this.state.currentUser);
         console.log(this.state.id);
-        console.log(this.state.admin);
-        console.log()
+        console.log(event);
+        if (this.state.currentUser === this.state.admin) {
+            axios.delete('http://ec2-13-53-172-93.eu-north-1.compute.amazonaws.com:5000/group/' + this.state.id + "/" + event, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('jwt_access'),
+                },
+            })
+                .then(res => {
+                    console.log(res);
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.log("Retrieving Runs Failed." + error)
+                });
+        } else {
+            console.error("You are not an admin in this group.");
+        }
     }
 
     render() {
@@ -166,10 +182,7 @@ class Groups extends Component {
                         <h2>{this.state.name}</h2><br/><br/>
                         <p><b>Members:</b></p>
                         {this.state.members.map((member, i) =>
-                            <form onSubmit={(event) => this.deleteMember(this, event)} className="modalList">
                                 <p className="modalList">{member}</p>
-                                <input type="submit" className="delete_member" value="X"/>
-                            </form>
                         )}<br/>
                         <p><b>Admin:</b> {this.state.admin}</p>
                         <div className="modalFooter">
